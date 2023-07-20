@@ -1,0 +1,14 @@
+---
+import Heatmap from "./Heatmap.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="p-3 max-w-4xl w-full border rounded-md">
+  <h1 class="text-lg mb-3">{title}</h1>
+  <Heatmap />
+</section>

@@ -1,5 +1,11 @@
 ---
+import Dashboard from "../components/Dashboard.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="🏋🏽 Gym" />
+<Layout title="🏋🏽 Gym">
+  <main class="m-10 flex flex-col justify-center gap-5 items-center">
+    <Dashboard title="🏋🏽 Gym" />
+    <Dashboard title="🇬🇧 Learning English" />
+  </main>
+</Layout>
