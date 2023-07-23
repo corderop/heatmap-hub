@@ -1,11 +1,16 @@
 ---
+import { getFirstDayOfWeek } from "../utils/dates";
 import Day from "./Day.astro";
 
 const weeks = Array.from({ length: 52 }).map((_, weekDiff) => {
+  // Get the day of the week involved
+  const day = new Date();
+  day.setDate(day.getDate() - weekDiff * 7);
+  // Get the first day of the week
+  const firtDayOfWeek = getFirstDayOfWeek(day, true);
+
   return Array.from({ length: 7 }).map((_, dayDiff) => {
-    const date = new Date();
-    date.setDate(date.getDate() - 6 - weekDiff * 7);
-    date.setUTCHours(0, 0, 0, 0);
+    const date = new Date(firtDayOfWeek.getTime());
     date.setDate(date.getDate() + dayDiff);
 
     return {

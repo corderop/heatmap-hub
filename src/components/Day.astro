@@ -5,7 +5,7 @@ interface Props {
 }
 
 const { date, selected } = Astro.props;
-const dateStr = date?.toISOString().split("T")[0];
+const dateStr = date.toLocaleDateString("es-ES");
 ---
 
 <div
