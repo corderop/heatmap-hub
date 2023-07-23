@@ -1,4 +1,5 @@
 import type React from "react";
+import { useMemo, useState } from "react";
 
 interface Props {
   date: Date;
@@ -6,16 +7,34 @@ interface Props {
 }
 
 const Day: React.FC<Props> = ({ date, selected }) => {
-  const dateStr = date.toLocaleDateString("es-ES");
-  const isEnabled = date > new Date();
-  let bgClass = "";
+  const [isSelected, setIsSelected] = useState(selected);
+  const isFuture = date > new Date();
 
-  if (!isEnabled) {
-    bgClass = selected ? "bg-[#50c878]" : "bg-[#50c87830]";
-  }
+	function performSelection () {
+		if (isFuture) return;
+
+		const newIsSelected = !isSelected;
+		setIsSelected(newIsSelected);
+	};
+	
+	let bgClass = "";
+	let borderClass = "";
+	let pointerClass = "";
+
+	if (!isFuture) {
+		bgClass = isSelected ? "bg-[#50c878]" : "bg-[#50c87830]";
+		borderClass = "box-border hover:border hover:border-[#50c878]"
+	} else {
+		pointerClass = "cursor-default"
+	}
+
 
   return (
-    <div className={`w-3 h-3 rounded-sm ${bgClass}`} title={dateStr}></div>
+    <button
+      className={`w-3 h-3 rounded-sm ${bgClass} ${borderClass} ${pointerClass}`}
+      title={date.toLocaleDateString("es-ES")}
+      onClick={performSelection}
+    ></button>
   );
 };
 

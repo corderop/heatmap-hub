@@ -27,7 +27,9 @@ const weeks = Array.from({ length: 52 }).map((_, weekDiff) => {
 >
   {
     weeks.map((week) =>
-      week.map((day) => <Day date={day.date} selected={day.selected} />)
+      week.map((day) => (
+        <Day date={day.date} selected={day.selected} client:visible />
+      ))
     )
   }
 </div>
