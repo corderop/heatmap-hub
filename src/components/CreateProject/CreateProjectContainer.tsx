@@ -1,9 +1,11 @@
 import type React from "react";
 import { useState } from "react";
+import CreateProject from "../../services/projects/application/CreateProject";
+import ProjectRepositoryLocalStorage from "../../services/projects/infraestructure/ProjectRepositoryLocalStorage";
 import CreateProjectButton from "./CreateProjectButton";
 import CreateProjectForm from "./CreateProjectForm";
 
-const CreateProject: React.FC = () => {
+const CreateProjectComponent: React.FC = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const showCreationForm = () => {
@@ -14,8 +16,8 @@ const CreateProject: React.FC = () => {
     setIsFormVisible(false);
   };
 
-  const createProject = () => {
-    console.log("Creating project");
+  const createProject = async (name: string) => {
+    await new CreateProject(new ProjectRepositoryLocalStorage()).execute(name);
   };
 
   return (
@@ -31,4 +33,4 @@ const CreateProject: React.FC = () => {
   );
 };
 
-export default CreateProject;
+export default CreateProjectComponent;
