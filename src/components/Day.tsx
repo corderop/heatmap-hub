@@ -1,39 +1,28 @@
 import type React from "react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   date: Date;
   selected: boolean;
+  actionable?: boolean;
 }
 
-const Day: React.FC<Props> = ({ date, selected }) => {
+const Day: React.FC<Props> = ({ date, selected, actionable = true }) => {
   const [isSelected, setIsSelected] = useState(selected);
-  const isFuture = date > new Date();
 
-	function performSelection () {
-		if (isFuture) return;
+  function performSelection() {
+    setIsSelected(!isSelected);
+  }
 
-		const newIsSelected = !isSelected;
-		setIsSelected(newIsSelected);
-	};
-	
-	let bgClass = "";
-	let borderClass = "";
-	let pointerClass = "";
-
-	if (!isFuture) {
-		bgClass = isSelected ? "bg-[#50c878]" : "bg-[#50c87830]";
-		borderClass = "box-border hover:border hover:border-[#50c878]"
-	} else {
-		pointerClass = "cursor-default"
-	}
-
+  let bgClass = isSelected ? "bg-[#50c878]" : "bg-[#50c87830]";
 
   return (
     <button
-      className={`w-3 h-3 rounded-sm ${bgClass} ${borderClass} ${pointerClass}`}
+      aria-label={`${date.toLocaleDateString("es-ES")}`}
+      className={`w-3 h-3 rounded-sm ${bgClass} hover:border hover:border-[#50c878] disabled:border-none disabled:cursor-not-allowed`}
       title={date.toLocaleDateString("es-ES")}
       onClick={performSelection}
+      disabled={!actionable}
     ></button>
   );
 };
