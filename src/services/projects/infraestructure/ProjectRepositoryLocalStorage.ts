@@ -7,6 +7,11 @@ class ProjectRepositoryLocalStorage implements ProjectRepository {
     projects.push(project);
     localStorage.setItem("projects", JSON.stringify(projects));
   }
+
+  async getAll(): Promise<Project[]> {
+    const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+    return projects;
+  }
 }
 
 export default ProjectRepositoryLocalStorage;

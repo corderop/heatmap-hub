@@ -18,6 +18,7 @@ const CreateProjectComponent: React.FC = () => {
 
   const createProject = async (name: string) => {
     await new CreateProject(new ProjectRepositoryLocalStorage()).execute(name);
+    window.location.reload();
   };
 
   return (

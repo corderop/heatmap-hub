@@ -1,13 +1,12 @@
 ---
 import CreateProjectContainer from "../components/CreateProject/CreateProjectContainer";
-import Project from "../components/Project.astro";
+import ProjectList from "../components/ProjectList";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="🏋🏽 Gym">
+<Layout title="Habit tracker">
   <main class="m-10 flex flex-col justify-center gap-5 items-center">
-    <Project title="🏋🏽 Gym" />
-    <Project title="🇬🇧 Learning English" />
+    <ProjectList client:load />
     <CreateProjectContainer client:visible />
   </main>
 </Layout>
