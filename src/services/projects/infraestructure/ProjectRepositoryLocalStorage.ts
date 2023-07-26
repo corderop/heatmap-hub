@@ -12,6 +12,14 @@ class ProjectRepositoryLocalStorage implements ProjectRepository {
     const projects = JSON.parse(localStorage.getItem("projects") || "[]");
     return projects;
   }
+
+  async delete(id: string): Promise<void> {
+    const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+    const newProjects = projects.filter(
+      (project: Project) => project.id !== id
+    );
+    localStorage.setItem("projects", JSON.stringify(newProjects));
+  }
 }
 
 export default ProjectRepositoryLocalStorage;
