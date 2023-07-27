@@ -5,13 +5,27 @@ interface Props {
   date: Date;
   selected: boolean;
   actionable?: boolean;
+  onChange: (value: boolean) => Promise<void>;
 }
 
-const Day: React.FC<Props> = ({ date, selected, actionable = true }) => {
+const Day: React.FC<Props> = ({
+  date,
+  selected,
+  actionable = true,
+  onChange,
+}) => {
   const [isSelected, setIsSelected] = useState(selected);
 
-  function performSelection() {
-    setIsSelected(!isSelected);
+  async function performSelection() {
+    const nextState = !isSelected;
+    setIsSelected((prevState) => !prevState);
+
+    try {
+      await onChange(nextState);
+    } catch (error) {
+      console.log(error);
+      setIsSelected((prevState) => !prevState);
+    }
   }
 
   let bgClass = isSelected ? "bg-[#50c878]" : "bg-[#50c87830]";

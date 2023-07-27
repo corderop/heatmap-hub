@@ -1,24 +1,54 @@
-import type Project from "../domain/Project";
+import Day from "../domain/Day";
+import Project from "../domain/Project";
 import type ProjectRepository from "../domain/ProjectRepository";
+import { ProjectNotFoundError } from "../domain/errors";
 
 class ProjectRepositoryLocalStorage implements ProjectRepository {
-  async create(project: Project): Promise<void> {
+  private convertObjectToProject(project: any): Project {
+    const daysObject: { [key: string]: { [key: string]: string } } =
+      project.days ?? {};
+
+    const days = Object.entries(daysObject).reduce((acc, [key, date]) => {
+      const dateObject = new Date(date.date);
+      return { ...acc, [key]: new Day(dateObject) };
+    }, {});
+
+    return new Project(project.id, project.name, days);
+  }
+
+  private getProjects(): Project[] {
     const projects = JSON.parse(localStorage.getItem("projects") || "[]");
-    projects.push(project);
+    return projects.map(this.convertObjectToProject);
+  }
+
+  private updateProjects(projects: Project[]): void {
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 
+  async create(project: Project): Promise<void> {
+    const projects = this.getProjects();
+    projects.push(project);
+    this.updateProjects(projects);
+  }
+
   async getAll(): Promise<Project[]> {
-    const projects = JSON.parse(localStorage.getItem("projects") || "[]");
-    return projects;
+    return this.getProjects();
+  }
+
+  async save(project: Project): Promise<void> {
+    let projects = this.getProjects();
+
+    const projectIndex = projects.findIndex((p) => p.id === project.id);
+    if (projectIndex === -1) throw new ProjectNotFoundError();
+
+    projects[projectIndex] = project;
+    this.updateProjects(projects);
   }
 
   async delete(id: string): Promise<void> {
-    const projects = JSON.parse(localStorage.getItem("projects") || "[]");
-    const newProjects = projects.filter(
-      (project: Project) => project.id !== id
-    );
-    localStorage.setItem("projects", JSON.stringify(newProjects));
+    let projects = this.getProjects();
+    projects = projects.filter((project: Project) => project.id !== id);
+    this.updateProjects(projects);
   }
 }
 

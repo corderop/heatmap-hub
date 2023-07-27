@@ -1,25 +1,41 @@
+import MarkDay from "../services/projects/application/MarkDay.ts";
+import UnmarkDay from "../services/projects/application/UnMarkDay.ts";
+import type ProjectModel from "../services/projects/domain/Project.ts";
+import ProjectRepositoryLocalStorage from "../services/projects/infraestructure/ProjectRepositoryLocalStorage.ts";
 import Heatmap from "./Heatmap.tsx";
 
 interface Props {
-  title: string;
+  project: ProjectModel;
   onDelete: () => void;
 }
 
-const Project: React.FC<Props> = ({ title, onDelete }) => {
+const Project: React.FC<Props> = ({ project, onDelete }) => {
+  async function performDayChange(date: Date, enabled: boolean) {
+    let actionService;
+
+    if (enabled) {
+      actionService = new MarkDay(new ProjectRepositoryLocalStorage());
+    } else {
+      actionService = new UnmarkDay(new ProjectRepositoryLocalStorage());
+    }
+
+    await actionService.execute(project, date);
+  }
+
   return (
     <section className="p-3 max-w-4xl w-full border rounded-md">
       <header className="mb-3 mr-1 flex align-center gap-3">
-        <h1 className="text-lg flex-grow">{title}</h1>
+        <h1 className="text-lg flex-grow">{project.name}</h1>
         <div className="flex gap-3 flex-grow-0">
           <button
-            aria-label={`Delete project ${title}`}
+            aria-label={`Delete project ${project.name}`}
             onClick={() => onDelete()}
           >
             🗑️
           </button>
         </div>
       </header>
-      <Heatmap />
+      <Heatmap days={project.getFlatDays()} onDayChange={performDayChange} />
     </section>
   );
 };

@@ -2,13 +2,19 @@ import { useMemo } from "react";
 import type React from "react";
 import Day from "./Day.tsx";
 import EmptyDay from "./EmptyDay.tsx";
-import { getFirstDayOfWeek } from "../utils/dates.ts";
+import { areDatesInTheSameDay, getFirstDayOfWeek } from "../utils/dates.ts";
 
 interface Props {
+  days?: Date[];
   actionable?: boolean;
+  onDayChange: (date: Date, enabled: boolean) => Promise<void>;
 }
 
-const Heatmap: React.FC<Props> = ({ actionable = true }) => {
+const Heatmap: React.FC<Props> = ({
+  days = [],
+  actionable = true,
+  onDayChange,
+}) => {
   const weeks = useMemo(() => {
     return Array.from({ length: 52 }).map((_, weekDiff) => {
       // Get the day of the week involved
@@ -23,8 +29,7 @@ const Heatmap: React.FC<Props> = ({ actionable = true }) => {
 
         return {
           date,
-          selected: false,
-          actionable,
+          selected: days.some((day) => areDatesInTheSameDay(day, date)),
         };
       });
     });
@@ -44,7 +49,8 @@ const Heatmap: React.FC<Props> = ({ actionable = true }) => {
               key={day.date.toISOString()}
               date={day.date}
               selected={day.selected}
-              actionable={day.actionable}
+              actionable={actionable}
+              onChange={async (value) => onDayChange(day.date, value)}
             />
           )
         )

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "@jest/globals";
-import { getFirstDayOfWeek } from "../../src/utils/dates";
+import { areDatesInTheSameDay, getFirstDayOfWeek } from "../../src/utils/dates";
 
 describe("getFirstDayOfWeek", () => {
   it("Should return sunday with a day in the middle of the week", () => {
@@ -18,5 +18,27 @@ describe("getFirstDayOfWeek", () => {
     const result = getFirstDayOfWeek(date, true);
 
     expect(result).toEqual(expected);
+  });
+});
+
+describe("areDatesInTheSameDay", () => {
+  it("Should return true for same days", () => {
+    const date1 = new Date(2023, 6, 19, 10);
+    const date2 = new Date(2023, 6, 19, 11);
+
+    const result = areDatesInTheSameDay(date1, date2);
+    console.log(date1.toISOString().substring(0, 10));
+    console.log(date2.toISOString().substring(0, 10));
+
+    expect(result).toStrictEqual(true);
+  });
+
+  it("Should return false for same days", () => {
+    const date1 = new Date(2023, 6, 19, 1);
+    const date2 = new Date(2023, 6, 20, 1);
+
+    const result = areDatesInTheSameDay(date1, date2);
+
+    expect(result).toStrictEqual(false);
   });
 });

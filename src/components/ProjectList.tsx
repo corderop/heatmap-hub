@@ -28,7 +28,7 @@ const ProjectList: React.FC = () => {
   return projects.map((project) => (
     <ProjectComponent
       key={project.id}
-      title={project.name}
+      project={project}
       onDelete={() => deleteProject(project)}
     />
   ));
