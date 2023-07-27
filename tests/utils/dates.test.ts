@@ -27,8 +27,6 @@ describe("areDatesInTheSameDay", () => {
     const date2 = new Date(2023, 6, 19, 11);
 
     const result = areDatesInTheSameDay(date1, date2);
-    console.log(date1.toISOString().substring(0, 10));
-    console.log(date2.toISOString().substring(0, 10));
 
     expect(result).toStrictEqual(true);
   });

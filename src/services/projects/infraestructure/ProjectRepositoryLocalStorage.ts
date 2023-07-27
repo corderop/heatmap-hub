@@ -5,15 +5,31 @@ import { ProjectNotFoundError } from "../domain/errors";
 
 class ProjectRepositoryLocalStorage implements ProjectRepository {
   private convertObjectToProject(project: any): Project {
-    const daysObject: { [key: string]: { [key: string]: string } } =
-      project.days ?? {};
+    const daysObject: { [key: string]: string } = project.days ?? {};
 
     const days = Object.entries(daysObject).reduce((acc, [key, date]) => {
-      const dateObject = new Date(date.date);
+      const dateObject = new Date(date);
       return { ...acc, [key]: new Day(dateObject) };
     }, {});
 
     return new Project(project.id, project.name, days);
+  }
+
+  private convertProjectToObject(project: Project): object {
+    const projectObject = {
+      id: project.id,
+      name: project.name,
+      days: {},
+    };
+
+    const days = Object.entries(project.days).reduce((acc, [key, date]) => {
+      return { ...acc, [date.key]: date.date.toISOString() };
+    }, {});
+
+    return {
+      ...projectObject,
+      days,
+    };
   }
 
   private getProjects(): Project[] {
@@ -22,7 +38,8 @@ class ProjectRepositoryLocalStorage implements ProjectRepository {
   }
 
   private updateProjects(projects: Project[]): void {
-    localStorage.setItem("projects", JSON.stringify(projects));
+    const projectObjects = projects.map(this.convertProjectToObject);
+    localStorage.setItem("projects", JSON.stringify(projectObjects));
   }
 
   async create(project: Project): Promise<void> {

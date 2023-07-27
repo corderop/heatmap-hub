@@ -5,8 +5,5 @@ export function getFirstDayOfWeek(date: Date, mondayFirst: boolean = false) {
 }
 
 export function areDatesInTheSameDay(date1: Date, date2: Date) {
-  return (
-    date1.toISOString().substring(0, 10) ===
-    date2.toISOString().substring(0, 10)
-  );
+  return date1.toLocaleDateString() === date2.toLocaleDateString();
 }
