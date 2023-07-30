@@ -1,5 +1,8 @@
 import { describe, it, expect } from "@jest/globals";
-import { areDatesInTheSameDay, getFirstDayOfWeek } from "../../src/utils/dates";
+import {
+  areDatesInTheSameDay,
+  getFirstDayOfWeek,
+} from "../../../src/utils/dates";
 
 describe("getFirstDayOfWeek", () => {
   it("Should return sunday with a day in the middle of the week", () => {
