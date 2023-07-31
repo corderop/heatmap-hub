@@ -28,16 +28,16 @@ const Day: React.FC<Props> = ({
     }
   }
 
-  let bgClass = isSelected ? "bg-[#50c878]" : "bg-[#50c87830]";
-
   return (
-    <button
-      aria-label={`${date.toLocaleDateString("es-ES")}`}
-      className={`w-3 h-3 rounded-sm ${bgClass} hover:border hover:border-[#50c878] disabled:border-none disabled:cursor-not-allowed`}
-      title={date.toLocaleDateString("es-ES")}
-      onClick={performSelection}
+    <input
+			aria-label={date.toLocaleDateString()}
+			type="checkbox"
+      className={`w-3 h-3 rounded-sm appearance-none checked:bg-[#50c878] bg-[#50c87830] cursor-pointer hover:border hover:border-[#50c878] disabled:border-none disabled:cursor-not-allowed`}
+      title={date.toLocaleDateString()}
+      onChange={performSelection}
+			checked={isSelected}
       disabled={!actionable}
-    ></button>
+    />
   );
 };
 
