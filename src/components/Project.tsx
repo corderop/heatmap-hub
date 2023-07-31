@@ -28,7 +28,7 @@ const Project: React.FC<Props> = ({ project, onDelete }) => {
         <h1 className="text-lg flex-grow">{project.name}</h1>
         <div className="flex gap-3 flex-grow-0">
           <button
-            aria-label={`Delete project ${project.name}`}
+            aria-label={`Delete ${project.name} project`}
             onClick={() => onDelete()}
           >
             🗑️
