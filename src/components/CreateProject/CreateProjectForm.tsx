@@ -14,7 +14,7 @@ const CreateProjectForm: React.FC<Props> = ({ onCancel, onCreate }) => {
     <section className="p-3 max-w-4xl w-full border rounded-md">
       <header className="mb-3 mr-1 flex align-center gap-3">
         <input
-          aria-label="New project title"
+          aria-label="Project Name"
           className="text-lg flex-grow bg-inherit focus:outline-none"
           placeholder="Enter a new title here"
           onChange={(e) => setTitle(e.target.value)}

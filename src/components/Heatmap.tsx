@@ -7,13 +7,13 @@ import { areDatesInTheSameDay, getFirstDayOfWeek } from "../utils/dates.ts";
 interface Props {
   days?: Date[];
   actionable?: boolean;
-  onDayChange: (date: Date, enabled: boolean) => Promise<void>;
+  onDayChange?: (date: Date, enabled: boolean) => Promise<void>;
 }
 
 const Heatmap: React.FC<Props> = ({
   days = [],
   actionable = true,
-  onDayChange,
+  onDayChange = () => {},
 }) => {
   const weeks = useMemo(() => {
     return Array.from({ length: 52 }).map((_, weekDiff) => {
