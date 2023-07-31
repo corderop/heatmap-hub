@@ -3,7 +3,7 @@ import ProjectPageObject from '../Projects/ProjectPageObject'
 
 test('Create a new project', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
 
   await page.getByRole('button', { name: 'Add new Project' }).click()
   await page.getByLabel('Project Name').fill(newProjectName)
@@ -17,7 +17,7 @@ test('Create a new project', async ({ page }) => {
 test('Cancel test creation', async ({ page }) => {
   const newProjectName = 'My new project'
 
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
 
   await page.getByRole('button', { name: 'Add new Project' }).click()
   await page.getByLabel('Project Name').fill(newProjectName)
@@ -30,7 +30,7 @@ test('Cancel test creation', async ({ page }) => {
 
 test('Create test persist after refresh', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
 
   await ProjectPageObject.createProject(page, newProjectName)
   await page.reload()
@@ -42,7 +42,7 @@ test('Create test persist after refresh', async ({ page }) => {
 
 test('Day checkboxes disabled during project creation', async ({ page }) => {
   const today = new Date().toLocaleDateString()
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
 
   await page.getByRole('button', { name: 'Add new Project' }).click()
 

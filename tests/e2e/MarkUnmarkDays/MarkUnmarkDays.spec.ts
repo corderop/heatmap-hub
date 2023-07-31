@@ -5,7 +5,7 @@ const yesterday = new Date(Date.now() - 24 * 3600 * 1000)
 
 test('Mark day', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
 
   await page
@@ -19,7 +19,7 @@ test('Mark day', async ({ page }) => {
 
 test('Day remains check after reload', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
 
   await page
@@ -34,7 +34,7 @@ test('Day remains check after reload', async ({ page }) => {
 
 test('Unmark day', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
 
   await page
@@ -54,7 +54,7 @@ test('Unmark day', async ({ page }) => {
 
 test('Day remains uncheck after reload', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
 
   await page

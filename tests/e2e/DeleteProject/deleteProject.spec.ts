@@ -3,7 +3,7 @@ import ProjectPageObject from '../Projects/ProjectPageObject'
 
 test('Delete a project', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
 
   await page
@@ -17,7 +17,7 @@ test('Delete a project', async ({ page }) => {
 
 test('Project does not appear again after reload', async ({ page }) => {
   const newProjectName = 'My new project'
-  await page.goto('/')
+  await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
 
   await page
