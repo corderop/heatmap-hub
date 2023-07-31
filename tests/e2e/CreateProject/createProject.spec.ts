@@ -35,3 +35,12 @@ test("Create test persist after refresh", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: newProjectName })).toBeVisible();
 });
+
+test("Day checkboxes disabled during project creation", async ({ page }) => {
+  const today = new Date().toLocaleDateString();
+  await page.goto("/");
+	
+  await page.getByRole("button", { name: "Add new Project" }).click();
+  
+  await expect(page.getByRole("checkbox", { name: today })).toBeDisabled();
+});
