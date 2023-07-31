@@ -1,39 +1,38 @@
-import { useMemo } from "react";
-import type React from "react";
-import Day from "./Day.tsx";
-import EmptyDay from "./EmptyDay.tsx";
-import { areDatesInTheSameDay, getFirstDayOfWeek } from "../utils/dates.ts";
+import React, { useMemo } from 'react'
+import Day from './Day.tsx'
+import EmptyDay from './EmptyDay.tsx'
+import { areDatesInTheSameDay, getFirstDayOfWeek } from '../utils/dates.ts'
 
 interface Props {
-  days?: Date[];
-  actionable?: boolean;
-  onDayChange?: (date: Date, enabled: boolean) => Promise<void>;
+  days?: Date[]
+  actionable?: boolean
+  onDayChange?: (date: Date, enabled: boolean) => Promise<void>
 }
 
 const Heatmap: React.FC<Props> = ({
   days = [],
   actionable = true,
-  onDayChange = () => {},
+  onDayChange = () => {}
 }) => {
   const weeks = useMemo(() => {
     return Array.from({ length: 52 }).map((_, weekDiff) => {
       // Get the day of the week involved
-      const day = new Date();
-      day.setDate(day.getDate() - weekDiff * 7);
+      const day = new Date()
+      day.setDate(day.getDate() - weekDiff * 7)
       // Get the first day of the week
-      const firtDayOfWeek = getFirstDayOfWeek(day, true);
+      const firtDayOfWeek = getFirstDayOfWeek(day, true)
 
       return Array.from({ length: 7 }).map((_, dayDiff) => {
-        const date = new Date(firtDayOfWeek.getTime());
-        date.setDate(date.getDate() + dayDiff);
+        const date = new Date(firtDayOfWeek.getTime())
+        date.setDate(date.getDate() + dayDiff)
 
         return {
           date,
-          selected: days.some((day) => areDatesInTheSameDay(day, date)),
-        };
-      });
-    });
-  }, [actionable]);
+          selected: days.some((day) => areDatesInTheSameDay(day, date))
+        }
+      })
+    })
+  }, [actionable])
 
   return (
     <div
@@ -42,21 +41,25 @@ const Heatmap: React.FC<Props> = ({
     >
       {weeks.map((week) =>
         week.map((day) =>
-          day.date > new Date() ? (
+          day.date > new Date()
+            ? (
             <EmptyDay key={day.date.toDateString()} />
-          ) : (
+              )
+            : (
             <Day
               key={day.date.toISOString()}
               date={day.date}
               selected={day.selected}
               actionable={actionable}
-              onChange={async (value) => onDayChange(day.date, value)}
+              onChange={async (value) => {
+                await onDayChange(day.date, value)
+              }}
             />
-          )
+              )
         )
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Heatmap;
+export default Heatmap

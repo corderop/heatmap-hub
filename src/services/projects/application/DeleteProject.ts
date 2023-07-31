@@ -1,11 +1,11 @@
-import type ProjectRepository from "../domain/ProjectRepository";
+import type ProjectRepository from '../domain/ProjectRepository'
 
 class DeleteProject {
-  constructor(private repository: ProjectRepository) {}
+  constructor (private readonly repository: ProjectRepository) {}
 
-  async execute(id: string): Promise<void> {
-    await this.repository.delete(id);
+  async execute (id: string): Promise<void> {
+    await this.repository.delete(id)
   }
 }
 
-export default DeleteProject;
+export default DeleteProject

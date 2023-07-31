@@ -1,25 +1,25 @@
-import MarkDay from "../services/projects/application/MarkDay.ts";
-import UnmarkDay from "../services/projects/application/UnMarkDay.ts";
-import type ProjectModel from "../services/projects/domain/Project.ts";
-import ProjectRepositoryLocalStorage from "../services/projects/infraestructure/ProjectRepositoryLocalStorage.ts";
-import Heatmap from "./Heatmap.tsx";
+import MarkDay from '../services/projects/application/MarkDay.ts'
+import UnmarkDay from '../services/projects/application/UnMarkDay.ts'
+import type ProjectModel from '../services/projects/domain/Project.ts'
+import ProjectRepositoryLocalStorage from '../services/projects/infraestructure/ProjectRepositoryLocalStorage.ts'
+import Heatmap from './Heatmap.tsx'
 
 interface Props {
-  project: ProjectModel;
-  onDelete: () => void;
+  project: ProjectModel
+  onDelete: () => void
 }
 
-const Project: React.FC<Props> = ({ project, onDelete }) => {
-  async function performDayChange(date: Date, enabled: boolean) {
-    let actionService;
+const Project: React.FC<Props> = ({ project, onDelete }: Props) => {
+  async function performDayChange (date: Date, enabled: boolean): Promise<void> {
+    let actionService
 
     if (enabled) {
-      actionService = new MarkDay(new ProjectRepositoryLocalStorage());
+      actionService = new MarkDay(new ProjectRepositoryLocalStorage())
     } else {
-      actionService = new UnmarkDay(new ProjectRepositoryLocalStorage());
+      actionService = new UnmarkDay(new ProjectRepositoryLocalStorage())
     }
 
-    await actionService.execute(project, date);
+    await actionService.execute(project, date)
   }
 
   return (
@@ -29,7 +29,9 @@ const Project: React.FC<Props> = ({ project, onDelete }) => {
         <div className="flex gap-3 flex-grow-0">
           <button
             aria-label={`Delete ${project.name} project`}
-            onClick={() => onDelete()}
+            onClick={() => {
+              onDelete()
+            }}
           >
             🗑️
           </button>
@@ -37,7 +39,7 @@ const Project: React.FC<Props> = ({ project, onDelete }) => {
       </header>
       <Heatmap days={project.getFlatDays()} onDayChange={performDayChange} />
     </section>
-  );
-};
+  )
+}
 
-export default Project;
+export default Project

@@ -1,44 +1,45 @@
-import type React from "react";
-import { useState } from "react";
+import React, { useState } from 'react'
 
 interface Props {
-  date: Date;
-  selected: boolean;
-  actionable?: boolean;
-  onChange: (value: boolean) => Promise<void>;
+  date: Date
+  selected: boolean
+  actionable?: boolean
+  onChange: (value: boolean) => Promise<void>
 }
 
 const Day: React.FC<Props> = ({
   date,
   selected,
   actionable = true,
-  onChange,
+  onChange
 }) => {
-  const [isSelected, setIsSelected] = useState(selected);
+  const [isSelected, setIsSelected] = useState(selected)
 
-  async function performSelection() {
-    const nextState = !isSelected;
-    setIsSelected((prevState) => !prevState);
+  async function performSelection (): Promise<void> {
+    const nextState = !isSelected
+    setIsSelected((prevState) => !prevState)
 
     try {
-      await onChange(nextState);
+      await onChange(nextState)
     } catch (error) {
-      console.log(error);
-      setIsSelected((prevState) => !prevState);
+      console.log(error)
+      setIsSelected((prevState) => !prevState)
     }
   }
 
   return (
     <input
-			aria-label={date.toLocaleDateString()}
-			type="checkbox"
-      className={`w-3 h-3 rounded-sm appearance-none checked:bg-[#50c878] bg-[#50c87830] cursor-pointer hover:border hover:border-[#50c878] disabled:border-none disabled:cursor-not-allowed`}
+      aria-label={date.toLocaleDateString()}
+      type="checkbox"
+      className={
+        'w-3 h-3 rounded-sm appearance-none checked:bg-[#50c878] bg-[#50c87830] cursor-pointer hover:border hover:border-[#50c878] disabled:border-none disabled:cursor-not-allowed'
+      }
       title={date.toLocaleDateString()}
       onChange={performSelection}
-			checked={isSelected}
+      checked={isSelected}
       disabled={!actionable}
     />
-  );
-};
+  )
+}
 
-export default Day;
+export default Day

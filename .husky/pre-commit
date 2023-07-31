@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+printf "\n\033[1;33m💄 Linting staged files\033[0m\n\n"
+npx lint-staged
+
+printf "\n"

@@ -1,7 +1,7 @@
-import type React from "react";
+import React from 'react'
 
 interface Props {
-  onClick: () => void;
+  onClick: () => void
 }
 
 const CreateProjectButton: React.FC<Props> = ({ onClick }) => {
@@ -12,7 +12,7 @@ const CreateProjectButton: React.FC<Props> = ({ onClick }) => {
     >
       ➕ Add new Project
     </button>
-  );
-};
+  )
+}
 
-export default CreateProjectButton;
+export default CreateProjectButton

@@ -1,14 +1,13 @@
-import type React from "react";
-import { useState } from "react";
-import Heatmap from "../Heatmap";
+import React, { useState } from 'react'
+import Heatmap from '../Heatmap'
 
 interface Props {
-  onCancel: () => void;
-  onCreate: (name: string) => void;
+  onCancel: () => void
+  onCreate: (name: string) => Promise<void>
 }
 
 const CreateProjectForm: React.FC<Props> = ({ onCancel, onCreate }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('')
 
   return (
     <section className="p-3 max-w-4xl w-full border rounded-md">
@@ -17,7 +16,9 @@ const CreateProjectForm: React.FC<Props> = ({ onCancel, onCreate }) => {
           aria-label="Project Name"
           className="text-lg flex-grow bg-inherit focus:outline-none"
           placeholder="Enter a new title here"
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value)
+          }}
         ></input>
         <div className="flex gap-3 flex-grow-0">
           <button aria-label="Cancel project creation" onClick={onCancel}>
@@ -25,7 +26,9 @@ const CreateProjectForm: React.FC<Props> = ({ onCancel, onCreate }) => {
           </button>
           <button
             aria-label="Confirm project creation"
-            onClick={() => onCreate(title)}
+            onClick={() => {
+              onCreate(title)
+            }}
           >
             ✅
           </button>
@@ -33,7 +36,7 @@ const CreateProjectForm: React.FC<Props> = ({ onCancel, onCreate }) => {
       </header>
       <Heatmap actionable={false} />
     </section>
-  );
-};
+  )
+}
 
-export default CreateProjectForm;
+export default CreateProjectForm
