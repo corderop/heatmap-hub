@@ -17,7 +17,7 @@ test('Mark day', async ({ page }) => {
   ).toBeChecked()
 })
 
-test('Day remains check after reload', async ({ page }) => {
+test('Day remains checked after reload', async ({ page }) => {
   const newProjectName = 'My new project'
   await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
@@ -52,7 +52,7 @@ test('Unmark day', async ({ page }) => {
   ).not.toBeChecked()
 })
 
-test('Day remains uncheck after reload', async ({ page }) => {
+test('Day remains unchecked after reload', async ({ page }) => {
   const newProjectName = 'My new project'
   await page.goto('/', { waitUntil: 'networkidle' })
   await ProjectPageObject.createProject(page, newProjectName)
