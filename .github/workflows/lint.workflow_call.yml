@@ -1,0 +1,27 @@
+name: 💄 Lint
+on: workflow_call
+
+jobs:
+  lint:
+    name: 💄 Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: "8.6.*"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: 'pnpm'
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 💄 Lint the code
+        run: pnpm lint

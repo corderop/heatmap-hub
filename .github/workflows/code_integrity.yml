@@ -1,0 +1,10 @@
+name: Code integrity
+
+on: ['push']
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.workflow_call.yml 
+
+  test:
+    uses: ./.github/workflows/testing.workflow_call.yml

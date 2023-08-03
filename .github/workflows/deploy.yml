@@ -1,0 +1,19 @@
+name: Deploy
+
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    uses: ./.github/workflows/testing.workflow_call.yml
+
+  deploy:
+    uses: ./.github/workflows/deploy.workflow_call.yml
+    needs: [test]
+    secrets:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

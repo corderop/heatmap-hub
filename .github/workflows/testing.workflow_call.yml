@@ -1,0 +1,46 @@
+name: ✅ Testing
+on: workflow_call
+
+jobs:
+  test:
+    name: ✅ Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: "8.6.*"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: 'pnpm'
+
+      - name: 🎭 Cache Playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 🎭 Install Playwright dependencies
+        run: npx playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: 🎭 Install Playwright dependencies from cache 
+        run: npx playwright install-deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+
+      - name: ✅ Run unit tests
+        run: pnpm tests:unit
+
+      - name: ✅ Run e2e tests
+        run: pnpm tests:e2e
