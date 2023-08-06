@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import GetProjects from '../services/projects/application/GetProjects'
-import ProjectRepositoryLocalStorage from '../services/projects/infraestructure/ProjectRepositoryLocalStorage'
 import type Project from '../services/projects/domain/Project'
 import ProjectComponent from './Project.tsx'
 import DeleteProject from '../services/projects/application/DeleteProject.ts'
+import { InfraestructureProjectRepository } from '../config/dependencies.ts'
 
 const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([])
 
   useEffect(() => {
     const getProjectService = new GetProjects(
-      new ProjectRepositoryLocalStorage()
+      new InfraestructureProjectRepository()
     )
     getProjectService.execute().then((projects) => {
       setProjects(projects)
@@ -18,7 +18,7 @@ const ProjectList: React.FC = () => {
   }, [])
 
   const deleteProject = (project: Project): void => {
-    new DeleteProject(new ProjectRepositoryLocalStorage()).execute(project.id)
+    new DeleteProject(new InfraestructureProjectRepository()).execute(project.id)
     setProjects((prevProjects) =>
       prevProjects.filter((p) => p.id !== project.id)
     )

@@ -1,7 +1,7 @@
+import { InfraestructureProjectRepository } from '../config/dependencies.ts'
 import MarkDay from '../services/projects/application/MarkDay.ts'
 import UnmarkDay from '../services/projects/application/UnMarkDay.ts'
 import type ProjectModel from '../services/projects/domain/Project.ts'
-import ProjectRepositoryLocalStorage from '../services/projects/infraestructure/ProjectRepositoryLocalStorage.ts'
 import Heatmap from './Heatmap.tsx'
 
 interface Props {
@@ -14,9 +14,9 @@ const Project: React.FC<Props> = ({ project, onDelete }: Props) => {
     let actionService
 
     if (enabled) {
-      actionService = new MarkDay(new ProjectRepositoryLocalStorage())
+      actionService = new MarkDay(new InfraestructureProjectRepository())
     } else {
-      actionService = new UnmarkDay(new ProjectRepositoryLocalStorage())
+      actionService = new UnmarkDay(new InfraestructureProjectRepository())
     }
 
     await actionService.execute(project, date)

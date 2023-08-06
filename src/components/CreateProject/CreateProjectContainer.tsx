@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import CreateProject from '../../services/projects/application/CreateProject'
-import ProjectRepositoryLocalStorage from '../../services/projects/infraestructure/ProjectRepositoryLocalStorage'
 import CreateProjectButton from './CreateProjectButton'
 import CreateProjectForm from './CreateProjectForm'
+import { InfraestructureProjectRepository } from '../../config/dependencies'
 
 const CreateProjectComponent: React.FC = () => {
   const [isFormVisible, setIsFormVisible] = useState(false)
@@ -16,7 +16,7 @@ const CreateProjectComponent: React.FC = () => {
   }
 
   const createProject = async (name: string): Promise<void> => {
-    await new CreateProject(new ProjectRepositoryLocalStorage()).execute(name)
+    await new CreateProject(new InfraestructureProjectRepository()).execute(name)
     window.location.reload()
   }
 
