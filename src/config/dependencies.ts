@@ -1,3 +1,3 @@
-import ProjectRepositoryLocalStorage from '../services/projects/infraestructure/ProjectRepositoryLocalStorage'
+import ProjectRepositoryNanostores from '../services/projects/infraestructure/nanostores/ProjectRepositoryNanostores'
 
-export const InfraestructureProjectRepository = ProjectRepositoryLocalStorage
+export const InfraestructureProjectRepository = ProjectRepositoryNanostores
