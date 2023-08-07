@@ -12,7 +12,9 @@
 pnpm install
 ```
 
-2. Run the project
+2. Copy `env.example` into `.env` file and set your firebase environment variables
+
+3. Run the project
 
 ```
 pnpm dev
