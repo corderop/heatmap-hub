@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="HeatmapHub">
   <main class="m-4 flex flex-col justify-center gap-5 items-center">
-    <ProjectList client:load />
+    <ProjectList client:only="react" />
     <CreateProjectContainer client:visible />
   </main>
 </Layout>

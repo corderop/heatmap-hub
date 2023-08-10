@@ -17,7 +17,7 @@ const CreateProjectComponent: React.FC = () => {
 
   const createProject = async (name: string): Promise<void> => {
     await new CreateProject(new InfraestructureProjectRepository()).execute(name)
-    window.location.reload()
+    hideCreationForm()
   }
 
   return (

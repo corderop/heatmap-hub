@@ -33,6 +33,5 @@ export const deleteProject = action($projects, 'deleteProject', (store, id: stri
     return
   }
 
-  projects.splice(projectIndex, 1)
-  store.set(projects)
+  store.set(projects.toSpliced(projectIndex, 1))
 })
