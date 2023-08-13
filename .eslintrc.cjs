@@ -12,14 +12,18 @@ module.exports = {
 				parser: "@typescript-eslint/parser",
 				extraFileExtensions: [".astro"],
 			},
-			rules: {},
 		},
 		{
       files: ["*.jsx", "*.tsx"],
       extends: "plugin:react/recommended",
 			rules: {
 				"react/react-in-jsx-scope": "off", // Disabled for React 17+
-			}
+			},
+			settings: {
+				react: {
+					"version": "18.0.0"
+				}
+			},
     },
     {
 			files: ["*.js", "*.jsx", "*.ts", "*.tsx"],
@@ -32,7 +36,7 @@ module.exports = {
 				"@typescript-eslint/no-misused-promises": "off",
 				"@typescript-eslint/no-dynamic-delete": "off",
 				"@typescript-eslint/no-extraneous-class": "off",
-			}
+			},
     },
     {
       env: {
