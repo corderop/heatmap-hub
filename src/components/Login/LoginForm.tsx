@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import ErrorAlert from './ErrorAlert'
 
 interface Props {
   isSignUp?: boolean
+  errors?: string[]
   onSubmit: (email: string, password: string) => void
 }
 
-const LoginForm: React.FC<Props> = ({ isSignUp = false, onSubmit }) => {
+const LoginForm: React.FC<Props> = ({ isSignUp = false, onSubmit, errors = [] }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,34 +17,36 @@ const LoginForm: React.FC<Props> = ({ isSignUp = false, onSubmit }) => {
   }
 
   const buttonMessage = isSignUp ? 'Sign Up' : 'Login'
+  const inputNamePrefix = isSignUp ? 'sign-up' : 'login'
 
   return (
     <>
       <form className='flex flex-col gap-5 mx-auto w-full max-w-sm' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-1'>
-          <label className="text-slate-500 text-sm" htmlFor='login-email' >Email</label>
+          <label className="text-slate-500 text-sm" htmlFor={`${inputNamePrefix}-email`} >Email</label>
           <input
             className='p-2 rounded-lg bg-transparent border border-slate-300 font-semibold'
-            id='login-email'
-            name='login-email'
+            id={`${inputNamePrefix}-email`}
+            name={`${inputNamePrefix}-email`}
             type="email"
             value={email} onChange={(event) => { setEmail(event.target.value) }}
             required
           />
         </div>
         <div className='flex flex-col gap-1'>
-          <label className="text-slate-500 text-sm" htmlFor='login-password'>Password</label>
+          <label className="text-slate-500 text-sm" htmlFor={`${inputNamePrefix}-password`}>Password</label>
           <input
             className='p-2 rounded-lg bg-transparent border border-slate-300 font-semibold'
-            id='login-password'
-            name='login-password'
+            id={`${inputNamePrefix}-password`}
+            name={`${inputNamePrefix}-password`}
             type="password"
             value={password}
             onChange={(event) => { setPassword(event.target.value) }}
             required
           />
         </div>
-        <button className="bg-green-600 text-white h-12 my-4 p-2 rounded-lg font-semibold" type='submit'>{ buttonMessage }</button>
+        { errors.length > 0 && <ErrorAlert errors={errors}/>}
+        <button className="bg-green-600 text-white h-12 p-2 rounded-lg font-semibold" type='submit' formNoValidate>{ buttonMessage }</button>
       </form>
     </>
   )

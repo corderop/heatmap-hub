@@ -10,9 +10,10 @@ const TABS = {
 interface Props {
   onLogin: (email: string, password: string) => void
   onSignUp: (email: string, password: string) => void
+  errors?: string[]
 }
 
-const LoginComponent: React.FC<Props> = ({ onLogin, onSignUp }) => {
+const LoginComponent: React.FC<Props> = ({ onLogin, onSignUp, errors = [] }) => {
   const [selectedTab, setSelectedTab] = useState(TABS.LOGIN)
   const tabs = Object.values(TABS)
 
@@ -24,10 +25,10 @@ const LoginComponent: React.FC<Props> = ({ onLogin, onSignUp }) => {
     <>
       <TabSelector tabs={tabs} value={selectedTab} onChange={onTabChange} />
       <div className={`${selectedTab !== TABS.LOGIN ? 'hidden' : ''}`}>
-        <LoginForm onSubmit={onSignUp}/>
+        <LoginForm onSubmit={onLogin} errors={errors}/>
       </div>
       <div className={`${selectedTab !== TABS.SIGN_UP ? 'hidden' : ''}`}>
-        <LoginForm onSubmit={onLogin}/>
+        <LoginForm isSignUp onSubmit={onSignUp} errors={errors}/>
       </div>
     </>
   )
