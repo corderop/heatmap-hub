@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import ErrorAlert from './ErrorAlert'
 
 interface Props {
   isSignUp?: boolean
-  errors?: string[]
   onSubmit: (email: string, password: string) => void
 }
 
-const LoginForm: React.FC<Props> = ({ isSignUp = false, onSubmit, errors = [] }) => {
+const LoginForm: React.FC<Props> = ({ isSignUp = false, onSubmit }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -45,7 +43,6 @@ const LoginForm: React.FC<Props> = ({ isSignUp = false, onSubmit, errors = [] })
             required
           />
         </div>
-        { errors.length > 0 && <ErrorAlert errors={errors}/>}
         <button className="bg-green-600 text-white h-12 p-2 rounded-lg font-semibold" type='submit' formNoValidate>{ buttonMessage }</button>
       </form>
     </>

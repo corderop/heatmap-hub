@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginForm from './LoginForm'
 import TabSelector from '../TabSelector'
+import Alert from '../Alerts/Alert'
+import type { AlertProp } from '../Alerts/types'
 
 const TABS = {
   LOGIN: 'Login',
@@ -10,25 +12,36 @@ const TABS = {
 interface Props {
   onLogin: (email: string, password: string) => void
   onSignUp: (email: string, password: string) => void
-  errors?: string[]
+  alert: AlertProp | null
 }
 
-const LoginComponent: React.FC<Props> = ({ onLogin, onSignUp, errors = [] }) => {
+const LoginComponent: React.FC<Props> = ({ onLogin, onSignUp, alert = null }) => {
+  const [modificableAlert, setModificableAlert] = React.useState<AlertProp | null>(alert)
   const [selectedTab, setSelectedTab] = useState(TABS.LOGIN)
   const tabs = Object.values(TABS)
 
+  useEffect(() => {
+    setModificableAlert(alert)
+  }, [alert])
+
   const onTabChange = (tab: string): void => {
+    setModificableAlert(null)
     setSelectedTab(tab)
   }
 
   return (
     <>
       <TabSelector tabs={tabs} value={selectedTab} onChange={onTabChange} />
+      { modificableAlert !== null &&
+        <div className='mx-auto w-full max-w-sm'>
+          <Alert alert={modificableAlert}/>
+        </div>
+      }
       <div className={`${selectedTab !== TABS.LOGIN ? 'hidden' : ''}`}>
-        <LoginForm onSubmit={onLogin} errors={errors}/>
+        <LoginForm onSubmit={onLogin} />
       </div>
       <div className={`${selectedTab !== TABS.SIGN_UP ? 'hidden' : ''}`}>
-        <LoginForm isSignUp onSubmit={onSignUp} errors={errors}/>
+        <LoginForm isSignUp onSubmit={onSignUp} />
       </div>
     </>
   )

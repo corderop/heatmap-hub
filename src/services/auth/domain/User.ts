@@ -1,13 +1,15 @@
+import { InvalidEmailError, InvalidPasswordError } from './errors'
+
 class User {
-  private readonly email: string
-  private readonly password: string
+  public readonly email: string
+  public readonly password: string
 
   constructor (email: string, password: string) {
     if (!User.isValidEmail(email)) {
-      throw new Error('Invalid email')
+      throw new InvalidEmailError()
     }
     if (!User.isValidPassword(password)) {
-      throw new Error('Invalid password')
+      throw new InvalidPasswordError()
     }
 
     this.email = email
