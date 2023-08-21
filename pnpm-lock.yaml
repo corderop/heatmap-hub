@@ -50,8 +50,8 @@ devDependencies:
     specifier: 29.6.2
     version: 29.6.2
   '@playwright/test':
-    specifier: 1.37.0
-    version: 1.37.0
+    specifier: 1.37.1
+    version: 1.37.1
   '@types/uuid':
     specifier: 9.0.2
     version: 9.0.2
@@ -1368,13 +1368,13 @@ packages:
       picocolors: 1.0.0
       tslib: 2.6.1
 
-  /@playwright/test@1.37.0:
-    resolution: {integrity: sha512-181WBLk4SRUyH1Q96VZl7BP6HcK0b7lbdeKisn3N/vnjitk+9HbdlFz/L5fey05vxaAhldIDnzo8KUoy8S3mmQ==}
+  /@playwright/test@1.37.1:
+    resolution: {integrity: sha512-bq9zTli3vWJo8S3LwB91U0qDNQDpEXnw7knhxLM0nwDvexQAwx9tO8iKDZSqqneVq+URd/WIoz+BALMqUTgdSg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
       '@types/node': 20.4.10
-      playwright-core: 1.37.0
+      playwright-core: 1.37.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -5597,8 +5597,8 @@ packages:
     dependencies:
       find-up: 4.1.0
 
-  /playwright-core@1.37.0:
-    resolution: {integrity: sha512-1c46jhTH/myQw6sesrcuHVtLoSNfJv8Pfy9t3rs6subY7kARv0HRw5PpyfPYPpPtQvBOmgbE6K+qgYUpj81LAA==}
+  /playwright-core@1.37.1:
+    resolution: {integrity: sha512-17EuQxlSIYCmEMwzMqusJ2ztDgJePjrbttaefgdsiqeLWidjYz9BxXaTaZWxH1J95SHGk6tjE+dwgWILJoUZfA==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true

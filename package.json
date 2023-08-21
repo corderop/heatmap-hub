@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@jest/globals": "29.6.2",
-    "@playwright/test": "1.37.0",
+    "@playwright/test": "1.37.1",
     "@types/uuid": "9.0.2",
     "@typescript-eslint/eslint-plugin": "5.52.0",
     "@typescript-eslint/parser": "6.3.0",
