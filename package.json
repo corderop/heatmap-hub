@@ -23,7 +23,7 @@
     "@nanostores/react": "0.7.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
-    "astro": "2.10.7",
+    "astro": "2.10.12",
     "nanostores": "0.9.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
