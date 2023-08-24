@@ -3,8 +3,9 @@ import LoginComponent from './LoginComponent'
 import User from '../../services/auth/domain/User'
 import SignUpUser from '../../services/auth/application/SignUpUser'
 import { InfraestructureAuthClient } from '../../config/dependencies'
-import { AlreadyExistingUserError, InvalidEmailError, InvalidPasswordError } from '../../services/auth/domain/errors'
+import { AlreadyExistingUserError, InvalidCredentialsError, InvalidEmailError, InvalidPasswordError, InvalidUserError, NotVerifiedUserError } from '../../services/auth/domain/errors'
 import type { AlertProp } from '../Alerts/types'
+import LoginUser from '../../services/auth/application/LoginUser'
 
 const MISSING_REQUIREMENTS_ERROR_MESSAGE = '⚠️ These requirements are missing:'
 const SUCCESFULLY_SIGN_UP_MESSAGE = (
@@ -16,8 +17,11 @@ const SUCCESFULLY_SIGN_UP_MESSAGE = (
 const ERRORS = {
   INVALID_EMAIL: 'You must enter a valid email',
   INVALID_PASSWORD: 'Your password should have more than 8 characters',
+  INVALID_USER: 'The user you provided is not valid or disabled',
+  INVALID_CREDENTIALS: 'The credentials you provided are not valid or wrong. Please try again',
   ALREADY_EXISTING_USER: 'This email is already used. Login instead or use another one',
-  UNEXPECTED: 'A unexpected error has ocurred. Please try again later'
+  UNEXPECTED: 'A unexpected error has ocurred. Please try again later',
+  NOT_VERIFIED_USER: 'Your email is not verified. Please check your inbox and verify your account.'
 }
 
 const LoginContainer: React.FC = () => {
@@ -40,7 +44,7 @@ const LoginContainer: React.FC = () => {
     })
   }
 
-  const onLogin = (email: string, password: string): void => {
+  const onLogin = async (email: string, password: string): Promise<void> => {
     const newErrors = getInputErrors(email, password)
 
     if (newErrors.length > 0) {
@@ -49,7 +53,32 @@ const LoginContainer: React.FC = () => {
     }
 
     setAlert(null)
-    // Call the login service
+    try {
+      const loginService = new LoginUser(InfraestructureAuthClient)
+      await loginService.execute(email, password)
+    } catch (error) {
+      if (error instanceof InvalidUserError) {
+        setAlert({
+          type: 'error',
+          message: ERRORS.INVALID_USER
+        })
+      } else if (error instanceof InvalidCredentialsError) {
+        setAlert({
+          type: 'error',
+          message: ERRORS.INVALID_CREDENTIALS
+        })
+      } else if (error instanceof NotVerifiedUserError) {
+        setAlert({
+          type: 'warning',
+          message: ERRORS.NOT_VERIFIED_USER
+        })
+      } else {
+        setAlert({
+          type: 'error',
+          message: ERRORS.UNEXPECTED
+        })
+      }
+    }
   }
 
   const onSignUp = async (email: string, password: string): Promise<void> => {
