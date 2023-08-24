@@ -1,10 +1,8 @@
 ---
-import Logo from "./Logo.astro";
+import Navbar from "../components/Navbar";
 ---
 
 <body class="p-3">
-  <nav class="max-w-4xl h-14 mx-auto flex justify-center">
-    <Logo />
-  </nav>
+  <Navbar client:load />
   <slot />
 </body>
