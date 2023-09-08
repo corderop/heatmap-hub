@@ -1,12 +1,15 @@
 ---
 import CreateProjectContainer from "../components/CreateProject/CreateProjectContainer";
 import ProjectList from "../components/ProjectList";
+import Body from "../layouts/Body.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="HeatmapHub">
-  <main class="my-4 flex flex-col justify-center gap-5 items-center">
-    <ProjectList client:only="react" />
-    <CreateProjectContainer client:visible />
-  </main>
+  <Body>
+    <main class="my-4 flex flex-col justify-center gap-5 items-center">
+      <ProjectList client:only="react" />
+      <CreateProjectContainer client:visible />
+    </main>
+  </Body>
 </Layout>

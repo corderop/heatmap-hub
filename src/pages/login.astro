@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Logo from "../layouts/Logo.astro";
+import LoginContainer from "../components/Login/LoginContainer";
+---
+
+<Layout title="Login">
+  <body>
+    <main
+      class="max-w-lg mx-2 sm:max-h-[90vh] overflow-auto w-full flex flex-col gap-10 px-4 py-10 md:border border-slate-300 rounded-lg"
+    >
+      <Logo />
+      <LoginContainer client:load />
+    </main>
+  </body>
+</Layout>
+
+<style scoped>
+  body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
