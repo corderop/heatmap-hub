@@ -32,7 +32,7 @@ jobs:
         run: pnpm install
 
       - name: 🎭 Install Playwright dependencies
-        run: npx playwright install --with-deps
+        run: pnpm playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: 🎭 Install Playwright dependencies from cache 
