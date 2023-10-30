@@ -16,7 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@astrojs/react": "3.0.2",
+    "@astrojs/react": "3.0.4",
     "@astrojs/tailwind": "5.0.0",
     "@astrojs/vercel": "5.0.2",
     "@nanostores/persistent": "0.9.1",
