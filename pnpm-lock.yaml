@@ -16,10 +16,10 @@ dependencies:
     version: 5.2.0(astro@3.3.0)
   '@nanostores/persistent':
     specifier: 0.9.1
-    version: 0.9.1(nanostores@0.9.3)
+    version: 0.9.1(nanostores@0.9.5)
   '@nanostores/react':
     specifier: 0.7.1
-    version: 0.7.1(nanostores@0.9.3)(react@18.2.0)
+    version: 0.7.1(nanostores@0.9.5)(react@18.2.0)
   '@types/react':
     specifier: 18.2.31
     version: 18.2.31
@@ -30,8 +30,8 @@ dependencies:
     specifier: 3.3.0
     version: 3.3.0(typescript@5.2.2)
   nanostores:
-    specifier: 0.9.3
-    version: 0.9.3
+    specifier: 0.9.5
+    version: 0.9.5
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -1296,23 +1296,23 @@ packages:
       - supports-color
     dev: false
 
-  /@nanostores/persistent@0.9.1(nanostores@0.9.3):
+  /@nanostores/persistent@0.9.1(nanostores@0.9.5):
     resolution: {integrity: sha512-ow57Hxm5VMaI5GHET/cVk8hX/iKMmbhcGrB9owfN8p8OHiiJgUlYxe1giacwlAALJXAh2t8bxXh42hHb64BCEA==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     peerDependencies:
       nanostores: ^0.9.0
     dependencies:
-      nanostores: 0.9.3
+      nanostores: 0.9.5
     dev: false
 
-  /@nanostores/react@0.7.1(nanostores@0.9.3)(react@18.2.0):
+  /@nanostores/react@0.7.1(nanostores@0.9.5)(react@18.2.0):
     resolution: {integrity: sha512-EXQg9N4MdI4eJQz/AZLIx3hxQ6BuBmV4Q55bCd5YCSgEOAW7tGTsIZxpRXxvxLXzflNvHTBvfrDNY38TlSVBkQ==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     peerDependencies:
       nanostores: ^0.9.0
       react: '>=18.0.0'
     dependencies:
-      nanostores: 0.9.3
+      nanostores: 0.9.5
       react: 18.2.0
     dev: false
 
@@ -5485,8 +5485,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  /nanostores@0.9.3:
-    resolution: {integrity: sha512-KobZjcVyNndNrb5DAjfs0WG0lRcZu5Q1BOrfTOxokFLi25zFrWPjg+joXC6kuDqNfSt9fQwppyjUBkRPtsL+8w==}
+  /nanostores@0.9.5:
+    resolution: {integrity: sha512-Z+p+g8E7yzaWwOe5gEUB2Ox0rCEeXWYIZWmYvw/ajNYX8DlXdMvMDj8DWfM/subqPAcsf8l8Td4iAwO1DeIIRQ==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     dev: false
 
