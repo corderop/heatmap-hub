@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@astrojs/react": "3.0.4",
-    "@astrojs/tailwind": "5.0.2",
+    "@astrojs/tailwind": "5.0.3",
     "@astrojs/vercel": "5.2.0",
     "@nanostores/persistent": "0.9.1",
     "@nanostores/react": "0.7.1",
