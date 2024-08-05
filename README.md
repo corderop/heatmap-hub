@@ -1,4 +1,4 @@
-[![HeatmapHub example image](./docs/images/front-image.png)](https://heatmaphub.com/)
+[![HeatmapHub example image](./docs/images/front-image.png)](https://heatmap-hub.vercel.app/)
 
 ## 🧑🏽‍💻 Development
 
